@@ -38,6 +38,7 @@ require_once ('functions/functions.php'); ?>
             mail($_POST['email'], 'Confirmation de votre compte', "Afin de valider votre compte, merci de cliquer sur ce lien\nhttp://localhost/camagru/confirm.php?id=$id&token=$token");
             $_SESSION['flash']['success'] = "Un email de confirmation a été envoyé";
             header('location: index.php');
+            exit;
         }
     }
     if (!empty($errors))

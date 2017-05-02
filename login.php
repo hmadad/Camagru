@@ -1,5 +1,4 @@
-<?php require ('inc/header.php');
-require_once ('functions/functions.php'); ?>
+<?php require_once ('functions/functions.php'); ?>
 <?php
 if (!empty($_POST))
 {
@@ -13,27 +12,31 @@ if (!empty($_POST))
 
     if (empty($errors))
     {
+        session_start();
         require_once('config/db.php');
-        $req = $pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
-        $req->execute([$_POST['username'], password_hash($_POST['password'], PASSWORD_BCRYPT)]);
+        $req = $pdo->prepare("SELECT * FROM users WHERE (username = :username OR email = :username) AND confirmed_at IS NOT NULL");
+        $req->execute(['username' => $_POST['username']]);
         $user = $req->fetch();
-        if (!empty($user))
+        if (!empty($user) && password_verify($_POST['password'], $user->password))
         {
             $_SESSION['auth'] = $user;
+            $_SESSION['flash']['success'] = "Vous êtes maintenant connecté";
             header('location: index.php');
+            exit;
         }
         else
             $_SESSION['flash']['danger'] = "Login ou mot de passe incorrect";
     }
-}
-if (!empty($errors))
     debug($errors);
+}
+require ('inc/header.php');
 ?>
     <h1>Se connecter</h1>
     <form action="" method="POST">
-        <input type="text" name="username" placeholder="Nom d'utilisateur">
+        <input type="text" name="username" placeholder="Nom d'utilisateur Ou Email">
         <input type="password" name="password" placeholder="Mot de passe">
         <button type="submit">S'inscrire</button>
     </form>
+    <a href="forget.php">Mot de passe oublié</a>
 
 <?php require ('inc/footer.php'); ?>

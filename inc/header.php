@@ -15,15 +15,14 @@ if (session_status() == PHP_SESSION_NONE)
 </head>
 <body>
 <div class="nav">
-    <ul>
-        <a href="index.php"><li>Accueil</li></a>
+        <a href="index.php">Accueil</a>
         <?php if(!isset($_SESSION['auth'])): ?>
-        <a href="login.php"><li>Se connecter</li></a>
-        <a href="register.php"><li>S'inscrire</li></a>
+        <a href="login.php">Se connecter</a>
+        <a href="register.php">S'inscrire</a>
     <?php else :?>
-            <a href="lougout.php"<li>Se deconnecter</li></a>
+            <a href="account.php">Profile</a>
+            <a href="logout.php">Se deconnecter</a>
     <?php endif; ?>
-    </ul>
 </div>
 <?php
 
