@@ -16,6 +16,7 @@ if (session_status() == PHP_SESSION_NONE)
 <body>
 <div class="nav">
         <a href="index.php">Accueil</a>
+        <a href="galerie.php">Galerie</a>
         <?php if(!isset($_SESSION['auth'])): ?>
         <a href="login.php">Se connecter</a>
         <a href="register.php">S'inscrire</a>
