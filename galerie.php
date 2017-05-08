@@ -1,6 +1,6 @@
 <?php
 require_once 'config/db.php';
-
+/*                      PAGINATION                                    */
 $req = $pdo->prepare('SELECT COUNT(id) as nbArt FROM articles');
 $req->execute();
 $nbArt = $req->fetch()->nbArt;
@@ -15,14 +15,24 @@ else
 $req = $pdo->prepare('SELECT * FROM articles ORDER BY created_at DESC LIMIT '.(($cPage - 1)* $perPage).', '.$perPage);
 $req->execute();
 $pages = $req->fetchAll();
+/*                      FIN PAGINATION                                    */
 require 'inc/header.php';
 ?>
 
 <div class="galerie" style="width: 980px; margin: auto">
     <?php foreach ($pages as $page) :?>
-        <div class="articles" style="width: 500px; margin: auto">
-            <img src="<?= $page->path; ?>" alt="" style="width: 500px; height: 500px;">
-            <?= $page->like_count; ?>
+        <div class="articles" style="width: 500px; margin: auto; border: solid black 3px">
+            <a href="single.php?id=<?= $page->id ?>">
+                <img src="<?= $page->path; ?>" alt="" style="width: 500px; height: 500px;">
+            </a>
+            <hr>
+            <form action="like.php?vote=1&ref_id=<?= $page->id ?>" method="post">
+                <button type="submit"><span style="color: green">Like: </span><?= $page->like_count; ?></button>
+            </form>
+            <form action="like.php?vote=-1&ref_id=<?= $page->id ?>" method="post">
+                <button type="submit"><span style="color: red">Dislike: </span><?= $page->dislike_count; ?></button>
+            </form>
+            <hr>
         </div>
     <?php endforeach; ?>
 </div>

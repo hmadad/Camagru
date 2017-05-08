@@ -5,14 +5,16 @@ if (!isConnected())
     header('location: login.php');
 }
 require 'inc/header.php' ?>
-<h1>Bonjour <?php echo $_SESSION['auth']->username;?></h1>
-<form method="POST">
-    <?php radio(); ?>
-</form>
-<video id="video"></video>
-<button id="startbutton">Prendre une photo</button>
-<canvas id="canvas"></canvas>
-<img src="" id="photo" alt="photo">
+<div class="container">
+    <h1>Bonjour <?php echo $_SESSION['auth']->username;?></h1>
+    <form method="POST">
+        <?php radio(); ?>
+    </form>
+    <video id="video"></video>
+    <button id="startbutton">Prendre une photo</button>
+    <canvas id="canvas"></canvas>
+    <img src="" id="photo" alt="photo">
+</div>
 <script>
     (function() {
 

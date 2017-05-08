@@ -24,3 +24,9 @@ body {
     transition: border-bottom 0.3s;
     border-bottom: solid 3px red;
 }
+
+.container {
+    width: 980px;
+    height: auto;
+    margin: auto;
+}
