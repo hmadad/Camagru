@@ -6,6 +6,9 @@ if (!isConnected())
 }
 require 'inc/header.php' ?>
 <h1>Bonjour <?php echo $_SESSION['auth']->username;?></h1>
+<form method="POST">
+    <?php radio(); ?>
+</form>
 <video id="video"></video>
 <button id="startbutton">Prendre une photo</button>
 <canvas id="canvas"></canvas>
@@ -58,11 +61,17 @@ require 'inc/header.php' ?>
         }, false);
 
         function takepicture() {
+            var radio = document.querySelector('input[name=elements]:checked').value;
             canvas.width = width;
             canvas.height = height;
             canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-            var data = canvas.toDataURL('image/png');
+            var data = canvas.toDataURL('image/jpeg');
+            var elements = radio;
             photo.setAttribute('src', data);
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "http://localhost/cama/upload.php", true);
+            xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xmlhttp.send("data="+data+"&elements="+elements);
         }
 
         startbutton.addEventListener('click', function(ev){

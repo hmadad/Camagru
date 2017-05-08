@@ -19,3 +19,20 @@ function isConnected()
         return TRUE;
     return FALSE;
 }
+
+function radio()
+{
+    $i = 0;
+    foreach (glob("images/*.png") as $img)
+    {
+        echo '<input type="radio" name="elements" value="'.$img.'">'.substr($img, 7, strlen($img) - 7 - 4);
+        $i++;
+    }
+}
+
+function debug_to_console($data) {
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
+    echo "<script>console.log('Debug Objects: ".$output."');</script>";
+}
