@@ -36,3 +36,15 @@ function debug_to_console($data) {
         $output = implode(',', $output);
     echo "<script>console.log('Debug Objects: ".$output."');</script>";
 }
+
+function showUser($id, PDO $pdo)
+{
+    $req = $pdo->prepare('SELECT username FROM users WHERE id = ?');
+    $req->execute([$id]);
+    $user = $req->fetch();
+    if (empty($user))
+        return FALSE;
+    else
+        echo $user->username;
+    return TRUE;
+}

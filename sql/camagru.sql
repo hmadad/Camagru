@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
+-- version 4.6.0
+-- http://www.phpmyadmin.net
 --
--- Client :  127.0.0.1
--- Généré le :  Mer 03 Mai 2017 à 15:58
--- Version du serveur :  5.7.14
--- Version de PHP :  5.6.25
+-- Client :  localhost
+-- Généré le :  Mar 09 Mai 2017 à 14:03
+-- Version du serveur :  5.7.11
+-- Version de PHP :  7.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `articles` (
   `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `path` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL,
   `like_count` int(11) NOT NULL DEFAULT '0',
@@ -38,15 +39,33 @@ CREATE TABLE `articles` (
 -- Contenu de la table `articles`
 --
 
-INSERT INTO `articles` (`id`, `path`, `created_at`, `like_count`, `dislike_count`) VALUES
-(1, 'http://naruto.japflap.com/images/banner.jpg', '2017-05-03 00:00:00', 0, 0),
-(2, 'http://coloriage.info/images/ccovers/1461700982manga-naruto-sasuke-277.jpg', '2017-05-03 11:00:00', 0, 0),
-(3, 'https://i.ytimg.com/vi/OXmAXO4-6zs/maxresdefault.jpg', '2017-05-03 18:36:00', 0, 0),
-(4, 'http://laguerche.com/image/coloriage-naruto-10.jpg', '2017-05-03 11:47:26', 0, 0),
-(5, 'https://www.buzz2000.com/coloriage/naruto/coloriage-naruto-11188.jpg', '2017-05-24 20:33:00', 0, 0),
-(6, 'http://www.allodessin.com/tuts/138/dessin-de-naruto-termine.gif', '2017-05-16 11:31:00', 0, 0),
-(7, 'http://www.allodessin.com/tuts/153/dessin-de-kakashi-de-naruto-termine.gif', '2017-05-01 07:14:49', 0, 0),
-(8, 'https://s-media-cache-ak0.pinimg.com/736x/17/d1/45/17d145f9e5ad27417c269e35b51dc9eb.jpg', '2017-05-02 11:47:26', 0, 0);
+INSERT INTO `articles` (`id`, `user_id`, `path`, `created_at`, `like_count`, `dislike_count`) VALUES
+(45, 8, 'public/montages/8/AbmjNJhrov.jpg', '2017-05-09 15:46:19', 0, 0),
+(44, 8, 'public/montages/8/j3wW9cZmp6.jpg', '2017-05-09 15:17:50', 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `commentaires`
+--
+
+CREATE TABLE `commentaires` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `message` longtext NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `commentaires`
+--
+
+INSERT INTO `commentaires` (`id`, `user_id`, `post_id`, `message`, `created_at`) VALUES
+(1, 8, 44, 'Salut a tous !', '2017-05-09 15:40:51'),
+(2, 8, 45, 'coucouuuu', '2017-05-09 15:46:41'),
+(3, 8, 45, 'Bonjouuuur', '2017-05-09 15:47:09'),
+(4, 8, 45, 'Nice', '2017-05-09 15:49:03');
 
 -- --------------------------------------------------------
 
@@ -91,6 +110,16 @@ CREATE TABLE `votes` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
+-- Contenu de la table `votes`
+--
+
+INSERT INTO `votes` (`id`, `ref_id`, `ref`, `user_id`, `vote`, `created_at`) VALUES
+(1, 5, 'articles', 8, 1, '2017-05-09 09:30:58'),
+(2, 10, 'articles', 8, 1, '2017-05-09 10:02:32'),
+(3, 9, 'articles', 8, -1, '2017-05-09 10:02:33'),
+(4, 44, 'articles', 8, -1, '2017-05-09 13:17:57');
+
+--
 -- Index pour les tables exportées
 --
 
@@ -98,6 +127,12 @@ CREATE TABLE `votes` (
 -- Index pour la table `articles`
 --
 ALTER TABLE `articles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `commentaires`
+--
+ALTER TABLE `commentaires`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -120,7 +155,12 @@ ALTER TABLE `votes`
 -- AUTO_INCREMENT pour la table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+--
+-- AUTO_INCREMENT pour la table `commentaires`
+--
+ALTER TABLE `commentaires`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `users`
 --
@@ -130,7 +170,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

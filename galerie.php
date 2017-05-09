@@ -21,9 +21,9 @@ require 'inc/header.php';
 
 <div class="galerie" style="width: 980px; margin: auto">
     <?php foreach ($pages as $page) :?>
-        <div class="articles" style="width: 500px; margin: auto; border: solid black 3px">
+        <div class="articles" style="width: 320px; margin: auto; border: solid black 3px">
             <a href="single.php?id=<?= $page->id ?>">
-                <img src="<?= $page->path; ?>" alt="" style="width: 500px; height: 500px;">
+                <img src="<?= $page->path; ?>" alt="" style="width: 320px; height: 250px;">
             </a>
             <hr>
             <form action="like.php?vote=1&ref_id=<?= $page->id ?>" method="post">

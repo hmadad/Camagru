@@ -7,8 +7,11 @@ if (!isConnected())
 require 'inc/header.php' ?>
 <div class="container">
     <h1>Bonjour <?php echo $_SESSION['auth']->username;?></h1>
-    <form method="POST">
+    <form method="POST" action="upload.php" enctype="multipart/form-data">
         <?php radio(); ?>
+        <br />
+            <input type="file" name="data">
+            <button type="submit" name="submit">Envoyer</button>
     </form>
     <video id="video"></video>
     <button id="startbutton">Prendre une photo</button>
@@ -71,7 +74,7 @@ require 'inc/header.php' ?>
             var elements = radio;
             photo.setAttribute('src', data);
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("POST", "http://localhost/cama/upload.php", true);
+            xmlhttp.open("POST", "http://localhost:8080/Camagru/upload.php", true);
             xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xmlhttp.send("data="+data+"&elements="+elements);
         }
