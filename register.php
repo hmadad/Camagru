@@ -44,13 +44,22 @@ require_once ('functions/functions.php'); ?>
     if (!empty($errors))
         debug($errors);
 ?>
+<div class="container">
     <h1>S'inscrire</h1>
-    <form action="" method="POST">
-        <input type="text" name="username" placeholder="Nom d'utilisateur">
-        <input type="email" name="email" placeholder="Email">
-        <input type="password" name="password" placeholder="Mot de passe">
-        <input type="password" name="password_confirm" placeholder="Confirmer mot de passe">
-        <button type="submit">S'inscrire</button>
+    <form action="" method="POST" style="width: 100%">
+        <label for="username">Nom d'utilisateur</label>
+        <input type="text" name="username" placeholder="Nom d'utilisateur" style="margin: 15px 0; width: 100%; padding: 15px; font-size: 15px; border-radius: 5px; border: solid 1px rgb(51, 51, 51)">
+        <br />
+        <label for="email">Email</label>
+        <input type="email" name="email" placeholder="Email" style="margin: 15px 0; width: 100%; padding: 15px; font-size: 15px; border-radius: 5px; border: solid 1px rgb(51, 51, 51)">
+        <br />
+        <label for="password">Mot de passe</label>
+        <input type="password" name="password" placeholder="Mot de passe" style="margin: 15px 0; width: 100%; padding: 15px; font-size: 15px; border-radius: 5px; border: solid 1px rgb(51, 51, 51)">
+        <br />
+        <label for="password_confirm">Confirmer le mot de passe</label>
+        <input type="password" name="password_confirm" placeholder="Confirmer mot de passe" style="margin: 15px 0; width: 100%; padding: 15px; font-size: 15px; border-radius: 5px; border: solid 1px rgb(51, 51, 51)">
+        <br />
+        <button class="button" type="submit"><span>S'inscrire</span></button>
     </form>
-
+</div>
 <?php require ('inc/footer.php'); ?>

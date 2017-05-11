@@ -25,6 +25,7 @@ function radio()
     $i = 0;
     foreach (glob("images/*.png") as $img)
     {
+        echo '<img src="'.$img.'" style="width: 50px;">';
         echo '<input type="radio" name="elements" value="'.$img.'">'.substr($img, 7, strlen($img) - 7 - 4);
         $i++;
     }

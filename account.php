@@ -29,19 +29,24 @@ if (!empty($_POST))
             $req = $pdo->prepare("SELECT * FROM users WHERE username = ?");
             $req->execute([$_SESSION['auth']->username]);
             $_SESSION['auth'] = $req->fetch();
-            $_SESSION['flash']['success'] = "Mot de passe modifier avec succès";
+            $_SESSION['flash']['success'] = "Mot de passe modifier avec succï¿½s";
         }
     }
 }
 require 'inc/header.php' ?>
-
-<h1>Bonjour <?php echo $_SESSION['auth']->username; ?></h1>
-
-<form action="" method="POST">
-    <input type="password" name="old_password" placeholder="Ancien mot de passe">
-    <input type="password" name="new_password" placeholder="Nouveau mot de passe">
-    <input type="password" name="password_confirm" placeholder="Confirmation mot de passe">
-    <button type="submit">Modifier</button>
-</form>
-
+<div class="container">
+    <h1 style="">Bonjour <?php echo ucfirst($_SESSION['auth']->username); ?></h1>
+    <form action="" method="POST" style="width: 100%">
+        <label for="old_password">Ancien mot de passe</label>
+        <input type="password" name="old_password" placeholder="Ancien mot de passe" style="margin: 15px 0; width: 100%; padding: 15px; font-size: 15px; border-radius: 5px; border: solid 1px rgb(51, 51, 51)">
+        <br />
+        <label for="new_password">Nouveau mot de passe</label>
+        <input type="password" name="new_password" placeholder="Nouveau mot de passe" style="margin: 15px 0; width: 100%; padding: 15px; font-size: 15px; border-radius: 5px; border: solid 1px rgb(51, 51, 51)">
+        <br />
+        <label for="password_confim">Confirmer le mot de passe</label>
+        <input type="password" name="password_confirm" placeholder="Confirmation mot de passe" style="margin: 15px 0; width: 100%; padding: 15px; font-size: 15px; border-radius: 5px; border: solid 1px rgb(51, 51, 51)">
+        <br />
+        <button class="button" type="submit"><span>Modifier</span></button>
+    </form>
+</div>
 <?php require 'inc/footer.php' ?>

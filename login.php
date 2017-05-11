@@ -30,12 +30,17 @@ if (!empty($_POST))
 }
 require ('inc/header.php');
 ?>
+<div class="container">
     <h1>Se connecter</h1>
-    <form action="" method="POST">
-        <input type="text" name="username" placeholder="Nom d'utilisateur Ou Email">
-        <input type="password" name="password" placeholder="Mot de passe">
-        <button type="submit">S'inscrire</button>
+    <form action="" method="POST" style="width: 100%">
+        <label for="username">Nom d'utilisateur ou Email</label>
+        <input type="text" name="username" placeholder="Nom d'utilisateur Ou Email" style="margin: 15px 0; width: 100%; padding: 15px; font-size: 15px; border-radius: 5px; border: solid 1px rgb(51, 51, 51)">
+        <br />
+        <label for="password">Mot de passe (<a href="forget.php">Mot de passe oublié</a>)</label>
+        <input type="password" name="password" placeholder="Mot de passe" style="margin: 15px 0; width: 100%; padding: 15px; font-size: 15px; border-radius: 5px; border: solid 1px rgb(51, 51, 51)">
+        <br />
+        <button class="button" type="submit"><span>Se connecter</span></button>
     </form>
-    <a href="forget.php">Mot de passe oublié</a>
+</div>
 
 <?php require ('inc/footer.php'); ?>

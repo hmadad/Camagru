@@ -8,7 +8,6 @@ require 'functions/functions.php';
 session_start();
 if (!isset($_POST['submit']))
 {
-    var_dump($_FILES);
     $img = $_POST['data'];
     $img = str_replace('data:image/jpeg;base64,', '', $img);
     $img = str_replace(' ', '+', $img);
@@ -65,7 +64,7 @@ else
             exit;
         }
         //The path you wish to upload the image to
-        $imagePath = "public/pictures/".$_SESSION['auth']->id."/".$formated;
+        $imagePath = "public/pictures/".$formated;
 
         if(is_uploaded_file($imagetemp) && substr($imagetype, 0, 5) == "image") {
             if(move_uploaded_file($imagetemp, $imagePath .".".$imagetypep)) {

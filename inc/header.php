@@ -11,33 +11,53 @@ if (session_status() == PHP_SESSION_NONE)
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <title>Camagru</title>
 </head>
-<body>
-<div class="nav">
-        <a href="index.php">Accueil</a>
-        <a href="galerie.php">Galerie</a>
-        <?php if(!isset($_SESSION['auth'])): ?>
-        <a href="login.php">Se connecter</a>
-        <a href="register.php">S'inscrire</a>
-    <?php else :?>
-            <a href="account.php">Profile</a>
-            <a href="logout.php">Se deconnecter</a>
-    <?php endif; ?>
+<div class="menu">
+    <div class="container">
+        <div class="title">
+            <img src="images/logo.jpg" alt="" style="width: 50px; float: left">
+            <h1 style="margin: 0;">Camagru</h1>
+        </div>
+        <div class="nav">
+            <a href="index.php">Accueil</a>
+            <a href="galerie.php">Galerie</a>
+            <?php if(!isset($_SESSION['auth'])): ?>
+                <a href="login.php">Se connecter</a>
+                <a href="register.php">S'inscrire</a>
+            <?php else :?>
+                <a href="account.php">Profile</a>
+                <a href="logout.php">Se deconnecter</a>
+            <?php endif; ?>
+        </div>
+    </div>
 </div>
-<?php
+<div class="container">
+    <?php
 
-if (isset($_SESSION['flash']))
-{
-    foreach ($_SESSION['flash'] as $key => $value)
+    if (isset($_SESSION['flash']))
     {
-        if ($key == "danger")
-            echo '<h3 style="color: red;">'.$value.'</h3>';
-        if ($key == "success")
-            echo '<h3 style="color: green;">'.$value.'</h3>';
+        foreach ($_SESSION['flash'] as $key => $value)
+        {
+            if ($key == "danger")
+            {
+                echo '<div class="alert alert-danger">';
+                echo '<span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span> ';
+                echo $value;
+                echo '</div>';
+            }
+            if ($key == "success")
+            {
+                echo '<div class="alert alert-success">';
+                echo '<span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span> ';
+                echo $value;
+                echo '</div>';
+            }
 
+        }
+        unset($_SESSION['flash']);
     }
-    unset($_SESSION['flash']);
-}
 
-?>
+    ?>
+</div>
