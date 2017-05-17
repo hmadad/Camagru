@@ -49,3 +49,13 @@ function showUser($id, PDO $pdo)
         echo $user->username;
     return TRUE;
 }
+
+function findUserPost($post_id, PDO $pdo)
+{
+    $req = $pdo->prepare('SELECT * FROM articles WHERE id = ?');
+    $req->execute([$post_id]);
+    $article = $req->fetch();
+    $req = $pdo->prepare('SELECT * FROM users WHERE id = ?');
+    $req->execute([$article->user_id]);
+    return $req->fetch();
+}

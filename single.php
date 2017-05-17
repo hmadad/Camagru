@@ -14,6 +14,12 @@ if (isset($_POST['submit']))
     if (isset($_POST['message']))
     {
         $pdo->prepare('INSERT INTO commentaires SET user_id = ?, post_id = ?, message = ?, created_at = NOW()')->execute([$_SESSION['auth']->id, $_GET['id'], $_POST['message']]);
+        $auteur = findUserPost($_GET['id'], $pdo);
+        if ($auteur->id != $_SESSION['auth']->id) :
+            $name = $_SESSION['auth']->username;
+            $post_id = $_GET['id'];
+            mail($auteur->email, 'Camagru - Commentaire', "$name a commenté votre photo http://localhost/camagru/single.php?id=$post_id");
+        endif;
     }
     else
         $_SESSION['flash']['danger'] = "Commentaire vide";
