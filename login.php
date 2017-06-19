@@ -15,7 +15,7 @@ if (!empty($_POST))
     {
         require_once('config/db.php');
         $req = $pdo->prepare("SELECT * FROM users WHERE (username = :username OR email = :username) AND confirmed_at IS NOT NULL");
-        $req->execute(['username' => $_POST['username']]);
+        $req->execute(['username' => $_POST['username'], 'email' => $_POST['username']]);
         $user = $req->fetch();
         if (!empty($user) && password_verify($_POST['password'], $user->password))
         {

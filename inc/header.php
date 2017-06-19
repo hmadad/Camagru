@@ -22,11 +22,11 @@ if (session_status() == PHP_SESSION_NONE)
         </div>
         <div class="nav">
             <a href="index.php">Accueil</a>
-            <a href="galerie.php">Galerie</a>
             <?php if(!isset($_SESSION['auth'])): ?>
                 <a href="login.php">Se connecter</a>
                 <a href="register.php">S'inscrire</a>
             <?php else :?>
+                <a href="galerie.php">Galerie</a>
                 <a href="account.php">Profile</a>
                 <a href="logout.php">Se deconnecter</a>
             <?php endif; ?>

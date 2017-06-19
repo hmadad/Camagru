@@ -38,7 +38,7 @@ require 'inc/header.php' ?>
                 <button type="submit" class="button" name="submit" style="vertical-align:middle"><span>Envoyer</span></button>
             </div>
         </form>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias at aut distinctio eaque enim inventore itaque laborum molestiae molestias obcaecati, possimus quae repellendus saepe similique vel! Magnam maiores quo quod!</p>
+        <p>Amuse toi ;)</p>
     </div>
     <div class="sidebar" style="border: solid 2px #eee; border-radius: 20px;">
         <h2>Mes photos</h2>
@@ -103,7 +103,6 @@ require 'inc/header.php' ?>
 
 
         function takepicture() {
-            console.log("Je suis la");
             var radio = document.querySelector('input[name=elements]:checked').value;
             canvas.width = 320;
             canvas.height = 240;
@@ -111,10 +110,10 @@ require 'inc/header.php' ?>
             var data = canvas.toDataURL('image/jpeg');
             var elements = radio;
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("POST", "http://localhost/cama/upload.php", true);
+            xmlhttp.open("POST", "http://localhost:8080/Camagru/upload.php", true);
             xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xmlhttp.send("data="+data+"&elements="+elements);
-
+            document.location.href="http://localhost:8080/Camagru/"
         }
 
         startbutton.addEventListener('click', function(ev){

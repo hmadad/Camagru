@@ -17,7 +17,7 @@ if (isset($_GET['id']) && isset($_GET['token']))
                 $req = $pdo->prepare("SELECT * FROM users WHERE username = ?");
                 $req->execute([$user->username]);
                 $_SESSION['auth'] = $req->fetch();
-                $_SESSION['flash']['success'] = "Mot de passe reinitialisé avec succès";
+                $_SESSION['flash']['success'] = "Mot de passe reinitialisÃ© avec succÃ¨s";
                 header('location: index.php');
                 exit;
             }
@@ -36,11 +36,17 @@ if (!empty($_POST))
 }
 require ('inc/header.php');
 ?>
-    <h1>Reinitialiser mot de passe</h1>
-    <form action="" method="POST">
-        <input type="password" name="password" placeholder="Mot de passe">
-        <input type="password" name="password_confirm" placeholder="Mot de passe">
-        <button type="submit">Reinitialiser</button>
-    </form>
+    <div class="container">
+        <h1>Reinitialiser</h1>
+        <form action="" method="POST" style="width: 100%">
+            <label for="password">Nouveau mot de passe</label>
+            <input type="password" name="password" placeholder="Mot de passe" style="margin: 15px 0; width: 100%; padding: 15px; font-size: 15px; border-radius: 5px; border: solid 1px rgb(51, 51, 51)">
+            <br />
+            <label for="password_confirm">Confirmer le mot de passe</label>
+            <input type="password" name="password_confirm" placeholder="Confirmer mot de passe" style="margin: 15px 0; width: 100%; padding: 15px; font-size: 15px; border-radius: 5px; border: solid 1px rgb(51, 51, 51)">
+            <br />
+            <button class="button" type="submit"><span>Reinitialiser</span></button>
+        </form>
+    </div>
 
 <?php require ('inc/footer.php'); ?>

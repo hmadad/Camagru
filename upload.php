@@ -5,6 +5,14 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 }
 require 'functions/functions.php';
 
+
+if (!file_exists("public"))
+    mkdir("public");
+if (!file_exists("public/montages"))
+    mkdir("public/montages");
+if (!file_exists("public/pictures"))
+    mkdir("public/pictures");
+
 session_start();
 if (!isset($_POST['submit']))
 {
@@ -48,6 +56,11 @@ else
         $_SESSION['flash']['danger'] = "Aucune image upload";
 
     }
+    if (!isset($_POST['elements']))
+    {
+        $_SESSION['flash']['danger'] = "Vous devez choisir un filtre";
+
+    }
     else
     {
         $imagename = $_FILES['data']['name'];
@@ -69,6 +82,21 @@ else
         if(is_uploaded_file($imagetemp) && substr($imagetype, 0, 5) == "image") {
             if(move_uploaded_file($imagetemp, $imagePath .".".$imagetypep)) {
                 // On charge d'abord les images
+                $finfo = new finfo(FILEINFO_MIME);
+                if (!$finfo)
+                {
+                    $_SESSION['flash']['danger'] = "Nous avons rencontrer un probleme, veuillez ressayer";
+                    header('location: profile.php');
+                }
+                /* Derniere verification avec fileinfo */
+                $mime = mime_content_type("public/pictures/".$formated.".".$imagetypep);
+                $fileinfo = array('image/jpeg', 'image/jpg');
+                if (!in_array($mime, $fileinfo))
+                {
+                    $_SESSION['flash']['danger'] = "Impossible d'importer ce fichier";
+                    header('location: index.php');
+                    exit;
+                }
                 $source = imagecreatefrompng($_POST['elements']); // Le logo est la source
                 $destination = imagecreatefromjpeg("public/pictures/".$formated.".".$imagetypep); // La photo est la destination
                 imagealphablending($source, false);
