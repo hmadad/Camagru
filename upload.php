@@ -14,8 +14,9 @@ if (!file_exists("public/pictures"))
     mkdir("public/pictures");
 
 session_start();
-if (!isset($_POST['submit']))
+if (isset($_POST['data']))
 {
+    var_dump($_POST);
     $img = $_POST['data'];
     $img = str_replace('data:image/jpeg;base64,', '', $img);
     $img = str_replace(' ', '+', $img);
@@ -49,12 +50,16 @@ if (!isset($_POST['submit']))
     $req = $pdo->prepare("INSERT INTO articles SET user_id = ?, path = ?, created_at = NOW()")->execute([$_SESSION['auth']->id, $path]);
     $username = $_SESSION['auth']->username;
 }
-else
+else if (!isset($_POST['data']))
 {
-    if (!isset($_FILES['data']))
+    if (!isset($_FILES))
     {
         $_SESSION['flash']['danger'] = "Aucune image upload";
 
+    }
+    if (intval($_FILES['data']['size']) > 2097152)
+    {
+        $_SESSION['flash']['danger'] = "Fichier trop volimineux";
     }
     if (!isset($_POST['elements']))
     {
@@ -63,6 +68,7 @@ else
     }
     else
     {
+
         $imagename = $_FILES['data']['name'];
         $imagetype = $_FILES['data']['type'];
         $imagetypep = str_replace('image/', '', $imagetype);

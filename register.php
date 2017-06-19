@@ -250,7 +250,7 @@ if (session_status() == PHP_SESSION_NONE)
                                 <hr>
                                 <div class="container" style="display: block">
                                     <h1 style="width: 100%">Activation du compte</h1>
-                                    <p>Afin de valider votre compte, merci de cliquer sur <a href="http://localhost:8080/camagru/reset.php?id='.$id.'&token='.$token.'">ce lien</a></p>
+                                    <p>Afin de valider votre compte, merci de cliquer sur <a href="http://localhost:8080/camagru/confirm.php?id='.$id.'&token='.$token.'">ce lien</a></p>
                                 </div>
                             </body> 
                             </html>';

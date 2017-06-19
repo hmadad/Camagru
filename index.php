@@ -38,6 +38,7 @@ require 'inc/header.php' ?>
                 <button type="submit" class="button" name="submit" style="vertical-align:middle"><span>Envoyer</span></button>
             </div>
         </form>
+
         <p>Amuse toi ;)</p>
     </div>
     <div class="sidebar" style="border: solid 2px #eee; border-radius: 20px;">
@@ -45,10 +46,8 @@ require 'inc/header.php' ?>
         <?php if (!empty($photos)) :?>
         <?php foreach ($photos as $photo) :?>
                 <img src="<?= $photo->path ?>" alt="" style="width: 100%; height: 187px">
-                <form action="" method="post">
                     <input type="hidden" value="<?= $photo->path ?>" name="path">
                     <button type="submit" name="submit" value="<?= $photo->id ?>" style="background-color: transparent; border: none; margin: 0; padding: 0; font-size: 35px; color: red; float: left; cursor: pointer">&times;</button>
-                </form>
                 <p style="text-align: right"><?= $photo->created_at ?></p>
                 <hr>
         <?php endforeach; ?>
