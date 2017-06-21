@@ -1,6 +1,11 @@
 <?php
 require_once 'config/db.php';
 require_once 'functions/functions.php';
+if (!isConnected())
+{
+    header('location: login.php');
+    exit;
+}
 
 session_start();
 

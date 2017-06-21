@@ -1,4 +1,10 @@
 <?php
+require_once 'functions/functions.php';
+if (!isConnected())
+{
+    header('location: login.php');
+    exit;
+}
 require_once 'config/db.php';
 /*                      PAGINATION                                    */
 $req = $pdo->prepare('SELECT COUNT(id) as nbArt FROM articles');

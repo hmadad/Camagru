@@ -3,6 +3,12 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     http_response_code(403);
     die();
 }
+require_once 'functions/functions.php';
+if (!isConnected())
+{
+    header('location: login.php');
+    exit;
+}
 session_start();
 
 require_once 'config/db.php';

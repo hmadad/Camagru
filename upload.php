@@ -3,7 +3,12 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     http_response_code(403);
     die();
 }
-require 'functions/functions.php';
+require_once 'functions/functions.php';
+if (!isConnected())
+{
+    header('location: login.php');
+    exit;
+}
 
 
 if (!file_exists("public"))
@@ -57,10 +62,15 @@ else if (!isset($_POST['data']))
         $_SESSION['flash']['danger'] = "Aucune image upload";
 
     }
-    if (intval($_FILES['data']['size']) > 2097152)
+    $imagetype = $_FILES['data']['type'];
+    $imagetypep = str_replace('image/', '', $imagetype);
+    if ($imagetypep != "jpg" && $imagetypep != "jpeg")
     {
-        $_SESSION['flash']['danger'] = "Fichier trop volimineux";
+        $_SESSION['flash']['danger'] = "Mauvais format de l'image (uniquement jpg ou jpeg)";
+        header('location: index.php');
+        exit;
     }
+
     if (!isset($_POST['elements']))
     {
         $_SESSION['flash']['danger'] = "Vous devez choisir un filtre";
@@ -68,20 +78,10 @@ else if (!isset($_POST['data']))
     }
     else
     {
-
         $imagename = $_FILES['data']['name'];
-        $imagetype = $_FILES['data']['type'];
-        $imagetypep = str_replace('image/', '', $imagetype);
         $imageerror = $_FILES['data']['error'];
         $imagetemp = $_FILES['data']['tmp_name'];
         $formated = str_random(10);
-
-        if ($imagetypep != "jpg" && $imagetypep != "jpeg")
-        {
-            $_SESSION['flash']['danger'] = "Mauvais format de l'image (uniquement jpg ou jpeg)";
-            header('location: index.php');
-            exit;
-        }
         //The path you wish to upload the image to
         $imagePath = "public/pictures/".$formated;
 
